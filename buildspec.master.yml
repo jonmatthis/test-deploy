@@ -1,0 +1,39 @@
+version: 0.2
+
+env:
+  variables:
+    IMAGE_REPO_NAME: REPLACE ME
+    AWS_ACCOUNT_ID: REPLACE ME
+
+phases:
+  install:
+    runtime-versions:
+      docker: 19
+      python: 3.8
+    commands:
+      - export DOCKER_BUILDKIT=1
+      - export COMPOSE_DOCKER_CLI_BUILD=1
+      - pip install dvc poetry taskipy
+  pre_build:
+    commands:
+      - echo Get the environment
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
+      - AWS_FULL_IMAGE_NAME=$REPOSITORY_URI:$IMAGE_TAG
+      - AWS_FULL_IMAGE_NAME_LATEST=$REPOSITORY_URI:latest
+  build:
+    commands:
+      - echo Tests started + Docker Build
+      # https://github.com/moby/moby/issues/39003#issuecomment-852915070 - use buildkit inline cache
+      - docker build --cache-from $AWS_FULL_IMAGE_NAME_LATEST --build-arg BUILDKIT_INLINE_CACHE=1 -t $AWS_FULL_IMAGE_NAME .
+      - docker tag $AWS_FULL_IMAGE_NAME $AWS_FULL_IMAGE_NAME_LATEST
+  post_build:
+    commands:
+      - echo Build Completed!
+      - echo Now Pushing the Docker images...
+      - docker push $AWS_FULL_IMAGE_NAME_LATEST
+      - docker push $AWS_FULL_IMAGE_NAME
+

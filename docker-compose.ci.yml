@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      args:
+        BUILDKIT_INLINE_CACHE: 1
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - ENV=TEST
+      - CI=True
+    volumes:
+      - .:/workspace

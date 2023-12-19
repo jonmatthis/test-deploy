@@ -1,0 +1,64 @@
+*__pycache__*
+*.pyc
+*.pyd
+*.pyo
+*.pth
+.pem
+.ppk
+src/tests/*
+data/*
+docs/*
+Dockerfile
+
+
+# Virtual environment
+.venv/
+venv/*
+
+# PyCharm
+.idea
+
+# Python mode for VIM
+.ropeproject
+*/.ropeproject
+*/*/.ropeproject
+*/*/*/.ropeproject
+
+# Vim swap files
+*.swp
+*/*.swp
+*/*/*.swp
+*/*/*/*.swp
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Git
+.git
+.gitignore
+
+# Docker
+docker-compose.yml
+docker-compose.ci.yml
+.docker
+.dockerignore

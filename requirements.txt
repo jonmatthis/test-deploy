@@ -1,0 +1,26 @@
+
+# Depenendices for API
+fastapi==0.65.2
+requests==2.25.1
+dataclasses-json==0.5.4
+pydantic==1.8.2
+uvicorn==0.14.0
+# End of API dependencies
+--find-links https://download.pytorch.org/whl/torch_stable.html
+azure-storage-blob==12.8.0
+boto3==1.14
+coverage==5.5
+dvc==2.0.18
+flake8==3.9.1
+google-cloud-storage==1.37.1
+jupyter==1.0.0
+kungfuai-env==0.2.2
+pandas==1.2.4
+poetry==1.1.6
+pre-commit==2.12.1
+pytest==6.2.3
+pytest-icdiff==0.5
+pytest-watch==4.2.0
+taskipy==1.7.0
+torch==1.8.1+cpu; sys_platform == 'linux'
+torch==1.8.1; sys_platform == 'darwin'

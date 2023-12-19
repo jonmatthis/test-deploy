@@ -1,0 +1,19 @@
+
+[tool.taskipy.tasks]
+"setup"           = "pre-commit install"
+"build"           = "task setup && docker-compose build"
+"down"            = "docker-compose down"
+"up"              = "docker-compose up"
+"test:coverage"   = "./bin/coverage.sh"
+"notebook"        = "./bin/notebook.sh"
+"cli:predict"     = "./bin/predict.sh"
+"shell"           = "task setup && ./bin/shell.sh"
+"test"            = "./bin/test.sh"
+"ci:test"         = "./bin/ci-test.sh"
+"train"           = "./bin/train.sh"
+"predict"         = "./bin/predict.sh"
+"pytorch_test"    = "python -m src.setup.torch_setup"
+
+
+###### API specific
+"api"                 = "docker-compose run --service-ports app ./bin/web_server.sh"
