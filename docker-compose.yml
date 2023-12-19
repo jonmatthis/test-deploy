@@ -3,6 +3,7 @@ version: "3.8"
 services:
   # The general app which we've instrumented
   app:
+    image: us-east1-docker.pkg.dev/mocap-test-project/jonbot/template-api
     build:
       dockerfile: Dockerfile
       context: .

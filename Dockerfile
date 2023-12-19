@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.2
 
 # Good base image to start from for most development
-FROM python:3.8-slim
+FROM python:3.11-slim
 
 # Please remember, the base image we use /must be as small as possible/ for the best
 # production deployments. This is not optional.

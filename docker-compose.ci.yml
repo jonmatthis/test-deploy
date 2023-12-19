@@ -7,6 +7,7 @@ services:
       context: .
       args:
         BUILDKIT_INLINE_CACHE: 1
+    image: us-east1-docker.pkg.dev/mocap-test-project/jonbot/template-api
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
       - ENV=TEST
